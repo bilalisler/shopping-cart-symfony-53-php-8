@@ -12,7 +12,7 @@
 
 ### Docker
 
-- run `git clone git@github.com:bilalisler/symfony-53-php-8-shopping-cart.git` command
+- run `git clone git@github.com:bilalisler/shopping-cart-symfony-53-php-8.git` command
 - run `cp .env .env.local` and type your environment variables, eg. valid mysql port for the Docker
 - go to docker file and run `$ cd docker && docker-compose up`
 - go into php container to run some following commands `$ docker exec -it shopping_php_fpm sh`
