@@ -1,0 +1,76 @@
+{% extends 'admin.base.html.twig' %}
+
+{% block title %}Order List{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">{{ 'common.user'|trans }}</th>
+                        <th scope="col">{{ 'common.order_status'|trans }}</th>
+                        <th scope="col">{{ 'common.quantity'|trans }}</th>
+                        <th scope="col">{{ 'common.order_date'|trans }}</th>
+                        <th scope="col">#</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for order in orders %}
+                        <tr>
+                            <th scope="row">{{ loop.index }}</th>
+                            <td>{{ order.user.email|default }}</td>
+                            <td>
+                                <kbd>
+                                    {{ constant('App\\Entity\\Order::ORDER_STATUS_TEXTS')[order.status] }}
+                                </kbd>
+                            </td>
+                            <td>{{ order.paymentType }}</td>
+                            <td>{{ order.createdAt|date('d-m-Y') }}</td>
+                            <td>
+                                {% if order.approvedAt is empty %}
+                                    <a href="javascript:void(0)" data-order-id="{{ order.id }}"
+                                       class="btn btn-warning btn-sm orderApprove">
+                                        {{ 'common.approve'|trans }}
+                                    </a>
+                                {% else %}
+                                    <a href="javascript:void(0)"
+                                       class="btn btn-info btn-sm">
+                                        {{ 'common.approved'|trans }}
+                                    </a>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        $(document).ready(function () {
+            $('.orderApprove').on('click', function () {
+                let orderId = $(this).data('order-id');
+
+                if (confirm('Siparişi onaylamak üzeresiniz, emin misiniz?')) {
+                    $.ajax({
+                        url: Routing.generate('admin.order.approve', {'id': orderId}),
+                        method: 'PUT',
+                        success: function (response) {
+                            console.log(response.message);
+                        },
+                        error: function (xhr, ajaxOptions, thrownError) {
+                            alert(xhr.responseJSON.message);
+                        }
+
+                    })
+                }
+            });
+        });
+    </script>
+{% endblock %}

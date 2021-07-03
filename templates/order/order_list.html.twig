@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Order List{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">{{ 'common.order_status'|trans }}</th>
+                        <th scope="col">{{ 'common.quantity'|trans }}</th>
+                        <th scope="col">{{ 'common.order_date'|trans }}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for order in orderList %}
+                        <tr>
+                            <th scope="row">{{ loop.index }}</th>
+                            <td>
+                                <kbd>
+                                    {{ constant('App\\Entity\\Order::ORDER_STATUS_TEXTS')[order.status] }}
+                                </kbd>
+                            </td>
+                            <td>{{ order.paymentType }}</td>
+                            <td>{{ order.createdAt|date('d-m-Y') }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

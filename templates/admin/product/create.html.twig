@@ -1,0 +1,41 @@
+{% extends 'admin.base.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                {{ form_start(form,{'attr': {'class': 'mt-4 p-4 bg-light'}}) }}
+                <div class="form-group">
+                    {{ form_row(form.name, {
+                        'attr': {
+                            'class': 'form-control'
+                        }
+                    }) }}
+                    {{ form_row(form.description, {
+                        'attr': {
+                            'class': 'form-control'
+                        }
+                    }) }}
+                    {{ form_row(form.price, {
+                        'attr': {
+                            'class': 'form-control'
+                        }
+                    }) }}
+                    {{ form_row(form.product_image, {
+                        'attr': {
+                            'class': 'form-control'
+                        }
+                    }) }}
+
+                    <div class="invalid-feedback">
+                        {{ form_errors(form) }}
+                    </div>
+                </div>
+                {{ form_widget(form.save, {'attr': {'class': 'btn btn-warning w-25'}}) }}
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,40 @@
+common:
+  user: 'Kullanıcı'
+  approve: 'Onayla'
+  approved: 'Onaylandı'
+  description: 'Açıklama'
+  quantity: 'Ürün Adedi'
+  price: 'Fiyat'
+  product_image: 'Ürün Görsel'
+  name: 'Ürün Adı'
+  order_status: 'Sipariş Durumu'
+  order_address: 'Sipariş Adresi'
+  order_date: 'Sipariş Tarihi'
+  my_orders: 'Siparişlerim'
+  cart: 'Sepet'
+  products: 'Ürünler'
+  summary: 'Özet'
+  total: 'Toplam'
+  your_cart: 'Sepetin'
+  register: 'Kayıt Ol'
+  login: 'Giriş Yap'
+  logout: 'Çıkış'
+  payment_type: 'Ödeme Tipi'
+
+button:
+  add_to_card: 'Sepete Ekle'
+  view_details: 'Detayları Görüntüle'
+  save: 'Kaydet'
+  clear: 'Temizle'
+  update: 'Güncelle'
+  remove: 'Sil'
+  checkout: 'Ödeme Yap'
+  complete_order: 'Siparişi Tamamla'
+
+message:
+  empty_cart: 'Sepetiniz Boş. Ürünleri görüntülemek için <a href="%url%">tıklayınız</a>'
+
+lang:
+  lang: 'Dil'
+  turkish: 'Türkçe'
+  english: 'Ingilizce'

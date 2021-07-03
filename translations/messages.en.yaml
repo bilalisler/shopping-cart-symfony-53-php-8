@@ -1,0 +1,41 @@
+common:
+  user: 'User'
+  approve: 'Approve'
+  approved: 'Approved'
+  description: 'Description'
+  quantity: 'Quantity'
+  product_image: 'Product Image'
+  name: 'Product Name'
+  order_status: 'Order Status'
+  order_address: 'Order Address'
+  order_date: 'Order Date'
+  my_orders: 'My Orders'
+  price: 'Price'
+  cart: 'Cart'
+  products: 'Products'
+  summary: 'Summary'
+  total: 'Total'
+  your_cart: 'Your Cart'
+  register: 'Register'
+  login: 'Login'
+  logout: 'Logout'
+  payment_type: 'Payment Type'
+
+
+button:
+  add_to_card: 'Add to Card'
+  view_details: 'View Details'
+  save: 'Save'
+  clear: 'Clear'
+  remove: 'Remove'
+  update: 'Update'
+  checkout: 'Checkout'
+  complete_order: 'Complete Cart'
+
+message:
+  empty_cart: 'Your cart is empty. Go to the <a href="%url%">product list</a>'
+
+lang:
+  lang: 'Language'
+  turkish: 'Turkish'
+  english: 'English'

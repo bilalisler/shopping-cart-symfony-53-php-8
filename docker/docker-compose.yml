@@ -1,0 +1,57 @@
+version: '3'
+services:
+  database:
+      build:
+        context: ./database
+      environment:
+        - MYSQL_DATABASE=${DATABASE_NAME}
+        - MYSQL_USER=${DATABASE_USER}
+        - MYSQL_PASSWORD=${DATABASE_PASSWORD}
+        - MYSQL_ROOT_PASSWORD=${DATABASE_ROOT_PASSWORD}
+      ports:
+        - "33078:3306"
+      volumes:
+        - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+        - ./database/data:/var/lib/mysql
+      networks:
+        - app-network
+
+  php-fpm:
+    build:
+      context: ./php-fpm
+    container_name: shopping_php_fpm
+    depends_on:
+      - database
+    environment:
+      - APP_ENV=${APP_ENV}
+      - APP_SECRET=${APP_SECRET}
+      - DATABASE_URL=mysql://${DATABASE_ROOT_USER}:${DATABASE_ROOT_PASSWORD}@database:3306/${DATABASE_NAME}?serverVersion=5.7
+    volumes:
+      - ../:/var/www
+    networks:
+      - app-network
+
+  nginx:
+    build:
+      context: ./nginx
+    volumes:
+      - ../:/var/www
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/sites/:/etc/nginx/sites-available
+      - ./nginx/conf.d/:/etc/nginx/conf.d
+      - ./logs:/var/log
+    depends_on:
+      - php-fpm
+    ports:
+      - "8088:80"
+    networks:
+      - app-network
+
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  database:
+    driver: local

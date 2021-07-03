@@ -1,0 +1,66 @@
+{% extends 'admin.base.html.twig' %}
+
+{% block title %}Product List{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">{{ 'common.product_image'|trans }}</th>
+                        <th scope="col">{{ 'common.name'|trans }}</th>
+                        <th scope="col">{{ 'common.description'|trans }}</th>
+                        <th scope="col">{{ 'common.price'|trans }}</th>
+                        <th scope="col">#</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for product in products %}
+                        <tr product-id="{{ product.id }}">
+                            <th scope="row">{{ loop.index }}</th>
+                            <td><img src="{{ product.image }}" width="100"></td>
+                            <td>{{ product.name }}</td>
+                            <td>{{ product.description[:100] }}...</td>
+                            <td>{{ product.price }} ₺</td>
+                            <td>
+                                <a href="javascript:void(0)" data-product-id="{{ product.id }}"
+                                   class="btn btn-danger btn-sm productDelete">
+                                    {{ 'button.remove'|trans }}
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        $(document).ready(function () {
+            $('.productDelete').on('click', function () {
+                let productId = $(this).data('product-id');
+
+                if (confirm('Ürünü silmek üzeresiniz, emin misiniz?')) {
+                    $.ajax({
+                        url: Routing.generate('admin.product.delete', {'id': productId}),
+                        method: 'DELETE',
+                        success: function (response) {
+                            $('tr[product-id="'+productId+'"]').remove();
+                            console.log(response.message);
+                        },
+                        error: function (xhr, ajaxOptions, thrownError) {
+                            alert(xhr.responseJSON.message);
+                        }
+
+                    })
+                }
+            });
+        });
+    </script>
+{% endblock %}

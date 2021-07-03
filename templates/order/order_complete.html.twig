@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Order Complete{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-12">
+                <h4>{{ 'common.cart'|trans }}</h4>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">{{ 'common.name'|trans }}</th>
+                        <th scope="col">{{ 'common.quantity'|trans }}</th>
+                        <th scope="col">{{ 'common.price'|trans }}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for cartItem in cart.items %}
+                        <tr>
+                            <th scope="row">{{ loop.index }}</th>
+                            <td>{{ cartItem.product.name }}</td>
+                            <td>{{ cartItem.quantity }}</td>
+                            <td>{{ cartItem.quantity * cartItem.product.price }} ₺</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        {{ form_start(form) }}
+        {{ form_row(form.address,{'attr':{'class': 'form-control'}}) }}
+        <div>
+            <span>{{ form_row(form.paymentType[0],{'attr':{'class': ''}}) }}</span>
+            <span>{{ form_row(form.paymentType[1],{'attr':{'class': ''}}) }}</span>
+        </div>
+        {{ form_row(form.save,{'attr':{'class': 'btn btn-primary btn-sm'}}) }}
+        {{ form_end(form) }}
+    </div>
+{% endblock %}
