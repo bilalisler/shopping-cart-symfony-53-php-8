@@ -1,6 +1,6 @@
 # Symfony 5 Shopping App
 
-Shopping Cart Example with php 8 and symfony 5.3
+Shopping Cart Example with php 8, symfony 5.3 and docker
 
 ## Requirements
 
